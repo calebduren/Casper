@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "target": "ES2020",
+      "module": "commonjs",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "outDir": "./assets/built/js",
+      "rootDir": "./assets/ts",
+      "declaration": true,
+      "sourceMap": true,
+      "lib": ["dom", "dom.iterable", "esnext"],
+      "types": ["jquery", "fitvids"],
+      "typeRoots": ["./node_modules/@types"],
+      "allowJs": true,
+      "moduleResolution": "node"
+    },
+    "include": ["assets/ts/**/*"],
+    "exclude": ["node_modules"]
+  }

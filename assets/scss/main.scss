@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+// Your custom SCSS below
+$primary-color: #3eb0ef;
+
+// Example of type-safe SCSS using modules
+:export {
+  primaryColor: $primary-color;
+}
+
+.custom-class {
+  color: $primary-color;
+  &:hover {
+    opacity: 0.8;
+  }
+}

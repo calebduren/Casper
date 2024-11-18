@@ -26,3 +26,8 @@ dist/
 config.json
 changelog.md
 changelog.md.bk
+
+node_modules/
+assets/built/
+*.tsbuildinfo
+.env

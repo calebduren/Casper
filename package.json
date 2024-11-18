@@ -1,30 +1,26 @@
 {
-    "name": "casper",
-    "description": "A clean, minimal default theme for the Ghost publishing platform",
-    "demo": "https://demo.ghost.io",
-    "version": "5.8.0",
+    "name": "enkel",
+    "description": "Custom Ghost theme for Enkel",
+    "version": "1.0.0",
     "engines": {
         "ghost": ">=5.0.0"
     },
     "license": "MIT",
-    "screenshots": {
-        "desktop": "assets/screenshot-desktop.jpg",
-        "mobile": "assets/screenshot-mobile.jpg"
-    },
     "scripts": {
-        "dev": "gulp",
-        "zip": "gulp zip",
-        "test": "gscan .",
-        "test:ci": "gscan --fatal --verbose .",
-        "pretest": "gulp build",
-        "preship": "yarn test",
-        "ship": "STATUS=$(git status --porcelain); echo $STATUS; if [ -z \"$STATUS\" ]; then yarn version && git push --follow-tags; else echo \"Uncomitted changes found.\" && exit 1; fi",
-        "postship": "git fetch && gulp release"
+        "dev": "concurrently \"npm run sass:watch\" \"npm run tailwind:watch\" \"npm run ts:watch\"",
+        "build": "npm run sass:build && npm run tailwind:build && npm run ts:build",
+        "tailwind:watch": "tailwindcss -i ./assets/css/screen.css -o ./assets/built/css/screen.css --watch",
+        "tailwind:build": "tailwindcss -i ./assets/css/screen.css -o ./assets/built/css/screen.css --minify",
+        "sass:watch": "sass --watch assets/scss/main.scss:assets/built/css/main.css",
+        "sass:build": "sass assets/scss/main.scss:assets/built/css/main.css --style=compressed",
+        "ts:watch": "tsc --watch",
+        "ts:build": "tsc",
+        "type-check": "tsc --noEmit"
     },
     "author": {
-        "name": "Ghost Foundation",
-        "email": "hello@ghost.org",
-        "url": "https://ghost.org/"
+        "name": "Caleb Durenberger",
+        "email": "hello@helloenkel.com",
+        "url": "https://helloenkel.com/"
     },
     "gpm": {
         "type": "theme",
@@ -40,14 +36,18 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://github.com/TryGhost/Casper.git"
+        "url": "https://github.com/calebduren/enkel-ghost-theme.git"
     },
-    "bugs": "https://github.com/TryGhost/Casper/issues",
-    "contributors": "https://github.com/TryGhost/Casper/graphs/contributors",
+    "bugs": "https://github.com/calebduren/enkel-ghost-theme/issues",
+    "contributors": "https://github.com/calebduren/enkel-ghost-theme/graphs/contributors",
     "devDependencies": {
         "@tryghost/release-utils": "0.8.1",
-        "autoprefixer": "10.4.7",
+        "@types/fitvids": "^2.1.3",
+        "@types/jquery": "^3.5.32",
+        "@types/node": "^22.9.0",
+        "autoprefixer": "^10.4.20",
         "beeper": "2.1.0",
+        "concurrently": "^9.1.0",
         "cssnano": "5.1.12",
         "gscan": "4.43.1",
         "gulp": "4.0.2",
@@ -57,10 +57,16 @@
         "gulp-uglify": "3.0.2",
         "gulp-zip": "5.1.0",
         "inquirer": "8.2.4",
-        "postcss": "8.2.13",
+        "postcss": "^8.4.49",
         "postcss-color-mod-function": "3.0.3",
         "postcss-easy-import": "4.0.0",
-        "pump": "3.0.0"
+        "pump": "3.0.0",
+        "sass": "^1.81.0",
+        "sass-loader": "^16.0.3",
+        "tailwindcss": "^3.4.15",
+        "ts-node": "^10.9.2",
+        "ts-node-dev": "^2.0.0",
+        "typescript": "^5.6.3"
     },
     "browserslist": [
         "defaults"
@@ -175,5 +181,8 @@
         "extends": [
             "@tryghost:theme"
         ]
+    },
+    "dependencies": {
+        "fitvids": "^2.1.1"
     }
 }
